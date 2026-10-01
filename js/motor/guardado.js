@@ -15,6 +15,7 @@ export function estadoInicial() {
     lailaNivel: 5,
     pos: null, // posición en el pueblo {x, y, dir}
     finalVisto: false,
+    fotos: {}, // fotos hechas en el juego (dataURL) por aventura
     sonido: true,
   };
 }

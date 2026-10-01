@@ -4,10 +4,15 @@ Un juego con el arte de Pokémon Blanco y Negro y niveles al estilo Super Mario,
 hecho con las aventuras de Alex y Sandra.
 
 - **Pueblo (Valdemoro):** vista desde arriba como en Pokémon. Alex te sigue y te da pistas.
-- **10 aventuras:** niveles de plataformas (piscina, láser tag, Thyssen, series, cumple,
-  comida con Begoña y David, la uni, las cenas, la casa rural en Cuevas del Valle y
-  Madrid al atardecer).
-- **Combates:** al final de cada aventura, Laila lucha por turnos contra un jefe.
+- **11 aventuras**, cada una con su forma de jugar:
+  - Plataformas tipo Mario: piscina, noche de series, cumple, comida con Begoña y David,
+    casa rural en Cuevas del Valle y Madrid al atardecer.
+  - Láser tag: galería de tiro (¡a Bea no, que va en tu equipo!).
+  - Thyssen: escapar del vigilante en un laberinto y hacer tartas de queso en Luna and Wanda.
+  - Noche de maquillaje: maquillar a Alex con el dedo (la foto se guarda en el álbum).
+  - La uni: examen tipo test sobre vosotros.
+  - Cenas: atrapar al vuelo los ingredientes.
+- **Combates:** al final de muchas aventuras, Laila lucha por turnos contra un jefe.
 - **Final:** Templo de Debod, pizza en el Vesubio, Salón de la Fama y la pista del regalo.
 
 ## Cómo se juega
@@ -32,7 +37,8 @@ Casi todo lo personal está en `js/datos/config.js`:
 - `CARTA_FINAL`: el mensaje de Alex en el Templo de Debod.
 - `PERSONAJES` y `LAILA`: colores y aspecto de cada personaje.
 
-Los textos y mapas de cada aventura están en `js/datos/aventuras.js`, y los jefes en `js/datos/jefes.js`.
+Los textos, mapas y fases de cada aventura están en `js/datos/aventuras.js`, los jefes en `js/datos/jefes.js`
+y las preguntas del examen en `js/datos/examen.js`.
 
 ## Probarlo en el ordenador
 
@@ -43,7 +49,7 @@ npx http-server .
 ```
 
 Atajos para probar partes sueltas: `?prueba=mundo`, `?prueba=nivel:piscina`,
-`?prueba=combate:flamenco`, `?prueba=final`.
+`?prueba=combate:flamenco`, `?prueba=aventura:thyssen`, `?prueba=mini:tartas-thyssen`, `?prueba=final`.
 
 ## Publicar con GitHub Pages
 

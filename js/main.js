@@ -12,6 +12,7 @@ import { EscenaFinal } from './escenas/final.js';
 import { EscenaMedalla } from './escenas/medalla.js';
 import { EscenaIntro } from './escenas/intro.js';
 import { aventura } from './datos/aventuras.js';
+import { jugarAventura, ESCENAS } from './escenas/flujo.js';
 
 const canvas = document.getElementById('pantalla');
 const ctx = iniciarPantalla(canvas);
@@ -20,7 +21,8 @@ cargar();
 setSilencio(!estado.sonido);
 alPrimerGesto(iniciarAudio);
 
-// Atajos para probar escenas sueltas: ?prueba=nivel:piscina, combate:flamenco, mundo, final...
+// Atajos para probar escenas sueltas: ?prueba=nivel:piscina, combate:flamenco, mundo, final,
+// aventura:thyssen, mini:tartas-thyssen...
 function escenaInicial() {
   const prueba = new URLSearchParams(location.search).get('prueba');
   if (!prueba) return new EscenaTitulo();
@@ -31,6 +33,16 @@ function escenaInicial() {
   if (tipo === 'mundo') return new EscenaMundo();
   if (tipo === 'intro') return new EscenaIntro();
   if (tipo === 'final') return new EscenaFinal();
+  if (tipo === 'aventura') {
+    setTimeout(() => jugarAventura(aventura(arg), false), 50);
+    return new EscenaMundo();
+  }
+  if (tipo === 'mini') {
+    const [clase, id] = arg.split('-');
+    const av = aventura(id);
+    const fase = (av.fases || []).find((f) => f.tipo === clase) || {};
+    return new ESCENAS[clase](av, { fase, alGanar: () => juego.cambiar(new EscenaMundo()), alSalir: () => juego.cambiar(new EscenaMundo()) });
+  }
   return new EscenaTitulo();
 }
 

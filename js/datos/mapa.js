@@ -102,7 +102,7 @@ export const EDIFICIOS = [
 // Qué pasa al entrar por cada puerta. "niveles" en orden de la historia.
 export const PUERTAS = {
   lasertag: { niveles: ['lasertag'] },
-  casaSandra: { niveles: ['series', 'comida'] },
+  casaSandra: { niveles: ['series', 'comida', 'maquillaje'] },
   casaAlex: { niveles: ['cumple', 'cenas'] },
   piscina: { niveles: ['piscina'] },
   estacion: { niveles: ['thyssen', 'uni', 'madrid'] },
