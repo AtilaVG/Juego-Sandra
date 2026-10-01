@@ -14,3 +14,9 @@ Estas reglas las ha pedido el dueño del repo y se aplican siempre, en todas las
 
 ## Pull requests
 - Igual que los commits: sin pie de atribución ni enlaces a sesiones de Claude.
+
+## Proyecto
+- Juego para Sandra (regalo de Alex): HTML + JavaScript (módulos ES) sin dependencias ni compilación; se publica con GitHub Pages desde `main`.
+- `js/motor/` (pantalla, entrada, audio, fuente, UI), `js/arte/` (sprites dibujados por código), `js/datos/` (textos, mapas, configuración), `js/escenas/` (título, intro, pueblo, plataformas, combate, medalla, final).
+- Lo personalizable (pista del regalo, carta final, colores) está en `js/datos/config.js`.
+- Para probar: servir la carpeta (`npx http-server .`) y usar `?prueba=mundo`, `?prueba=nivel:<id>`, `?prueba=combate:<jefe>` o `?prueba=final`. Comprobar siempre en vista de iPad (1180x820) y con capturas.
