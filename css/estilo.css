@@ -1,0 +1,207 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #0c0c14;
+  overflow: hidden;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+body {
+  position: fixed;
+  inset: 0;
+  font-family: ui-monospace, Menlo, monospace;
+}
+
+#marco {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.vertical #marco {
+  align-items: flex-start;
+  padding-top: env(safe-area-inset-top);
+}
+
+canvas {
+  display: block;
+}
+
+/* ---------- Controles táctiles ---------- */
+
+#controles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  --tam-cruceta: clamp(120px, 21vmin, 176px);
+  --tam-a: clamp(64px, 11.5vmin, 96px);
+  --tam-b: clamp(54px, 9.5vmin, 80px);
+}
+
+#controles > * {
+  pointer-events: auto;
+  touch-action: none;
+}
+
+body.teclado #controles,
+body.sin-tactil #controles {
+  display: none;
+}
+
+#cruceta {
+  position: absolute;
+  left: calc(18px + env(safe-area-inset-left));
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  width: var(--tam-cruceta);
+  height: var(--tam-cruceta);
+  opacity: 0.62;
+}
+
+#cruceta .flecha,
+#cruceta .centro {
+  position: absolute;
+  background: #2a2d3a;
+  border: 3px solid #f4f4f4;
+  box-sizing: border-box;
+}
+
+#cruceta .arr, #cruceta .abj {
+  left: 33.3%;
+  width: 33.4%;
+  height: 36%;
+}
+#cruceta .arr { top: 0; border-bottom: none; border-radius: 10px 10px 0 0; }
+#cruceta .abj { bottom: 0; border-top: none; border-radius: 0 0 10px 10px; }
+
+#cruceta .izq, #cruceta .der {
+  top: 33.3%;
+  height: 33.4%;
+  width: 36%;
+}
+#cruceta .izq { left: 0; border-right: none; border-radius: 10px 0 0 10px; }
+#cruceta .der { right: 0; border-left: none; border-radius: 0 10px 10px 0; }
+
+#cruceta .centro {
+  left: 33.3%;
+  top: 33.3%;
+  width: 33.4%;
+  height: 33.4%;
+  border: none;
+}
+
+#cruceta .flecha::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 9px solid transparent;
+  transform: translate(-50%, -50%);
+}
+#cruceta .arr::after { border-bottom: 12px solid #f4f4f4; border-top: none; }
+#cruceta .abj::after { border-top: 12px solid #f4f4f4; border-bottom: none; }
+#cruceta .izq::after { border-right: 12px solid #f4f4f4; border-left: none; }
+#cruceta .der::after { border-left: 12px solid #f4f4f4; border-right: none; }
+
+#cruceta .flecha.activa { background: #e8507a; }
+
+#botones {
+  position: absolute;
+  right: calc(18px + env(safe-area-inset-right));
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  width: calc(var(--tam-a) + var(--tam-b) + 14px);
+  height: calc(var(--tam-a) + var(--tam-b) * 0.6);
+  opacity: 0.68;
+}
+
+.boton {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 3px solid #f4f4f4;
+  color: #f4f4f4;
+  font-weight: bold;
+  font-size: 22px;
+  box-sizing: border-box;
+}
+
+.boton[data-boton="a"] {
+  right: 0;
+  top: 0;
+  width: var(--tam-a);
+  height: var(--tam-a);
+  background: #d23c5c;
+  font-size: 28px;
+}
+
+.boton[data-boton="b"] {
+  left: 0;
+  bottom: 0;
+  width: var(--tam-b);
+  height: var(--tam-b);
+  background: #3c5cd2;
+}
+
+.boton.activo { filter: brightness(1.4); transform: scale(0.94); }
+
+.boton-menu {
+  position: absolute;
+  right: calc(14px + env(safe-area-inset-right));
+  top: calc(12px + env(safe-area-inset-top));
+  padding: 8px 14px;
+  border-radius: 14px;
+  border: 2px solid #f4f4f4;
+  background: #2a2d3a;
+  color: #f4f4f4;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: 0.6;
+}
+
+.boton-menu.activo { background: #e8507a; }
+
+/* En vertical los controles quedan debajo de la pantalla, más grandes. */
+body.vertical #controles {
+  --tam-cruceta: clamp(140px, 36vmin, 220px);
+  --tam-a: clamp(72px, 19vmin, 120px);
+  --tam-b: clamp(60px, 16vmin, 100px);
+}
+body.vertical #cruceta,
+body.vertical #botones { opacity: 0.9; }
+body.vertical .boton-menu {
+  top: auto;
+  right: 50%;
+  transform: translateX(50%);
+  bottom: calc(24px + env(safe-area-inset-bottom));
+}
+
+/* Horizontal con botones táctiles: los controles van en paneles a los lados. */
+body.paneles #controles {
+  --tam-cruceta: min(clamp(120px, 21vmin, 176px), calc(var(--panel) - 14px));
+  --tam-a: min(clamp(64px, 11.5vmin, 96px), calc(var(--panel) * 0.5));
+  --tam-b: min(clamp(54px, 9.5vmin, 80px), calc(var(--panel) * 0.4));
+}
+body.paneles #cruceta {
+  left: calc((var(--panel) - var(--tam-cruceta)) / 2 + env(safe-area-inset-left) / 2);
+  bottom: 14%;
+  opacity: 0.85;
+}
+body.paneles #botones {
+  right: calc((var(--panel) - var(--tam-a) - var(--tam-b) - 14px) / 2 + env(safe-area-inset-right) / 2);
+  bottom: 14%;
+  opacity: 0.9;
+}
+body.paneles .boton-menu {
+  right: calc((var(--panel) - 86px) / 2);
+  top: calc(16px + env(safe-area-inset-top));
+  opacity: 0.85;
+}
