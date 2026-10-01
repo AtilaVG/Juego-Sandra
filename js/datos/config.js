@@ -21,7 +21,7 @@ export const PISTA_REGALO = [
 export const CARTA_FINAL = [
   'Bebe, si has llegado hasta aquí es que te has pasado todas nuestras aventuras.',
   'Desde que nos conocimos currando, cada plan contigo se ha convertido en un recuerdo bonito.',
-  'La piscina, el láser tag, el Thyssen, las tartas de queso, las series en el sofá, las cenas, la casa rural en Gredos...',
+  'La piscina, el láser tag, el Thyssen, las tartas de queso, las series en el sofá, la noche de maquillaje, las cenas, la casa rural en Gredos...',
   'Gracias por aguantar a este abuelete, por las risas y por hacer que todo sea mejor.',
   'Feliz mesario, Sandra. Te quiero muchísimo.',
 ];

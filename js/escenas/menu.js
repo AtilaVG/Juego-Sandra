@@ -8,6 +8,7 @@ import { rect } from '../motor/dibujo.js';
 import { estado, guardar } from '../motor/guardado.js';
 import { medalla } from '../arte/medallas.js';
 import { polaroid, beso } from '../arte/escenario.js';
+import { fotoRecuerdo } from '../arte/fotos.js';
 import { lailaFrente } from '../arte/bichos.js';
 import { AVENTURAS } from '../datos/aventuras.js';
 import { ATAQUES_LAILA, OBJETOS } from '../datos/jefes.js';
@@ -144,10 +145,14 @@ export class MenuPausa {
     escribirCentrado(ctx, 'ÁLBUM DE RECUERDOS  ' + (this.pagina + 1) + '/' + AVENTURAS.length, P.ancho / 2, 6, '#6a3a2a', '#f8f0e0');
     const cx = P.ancho / 2;
     if (tiene) {
+      const foto = fotoRecuerdo(av.id);
       ctx.save();
       ctx.translate(cx, 58);
       ctx.rotate(-0.05);
-      ctx.drawImage(polaroid(), -32, -36, 64, 72);
+      if (foto) {
+        rect(ctx, -34, -36, 68, 76, '#ffffff');
+        ctx.drawImage(foto, -28, -30, 56, 56);
+      } else ctx.drawImage(polaroid(), -32, -36, 64, 72);
       ctx.restore();
       caja(ctx, 12, 104, P.ancho - 24, 72);
       escribirCentrado(ctx, av.recuerdo.titulo, cx, 110, '#d03050');
@@ -157,7 +162,9 @@ export class MenuPausa {
       escribirCentrado(ctx, '?', cx, 52, '#a08060', null, 2);
       caja(ctx, 12, 104, P.ancho - 24, 50);
       escribirCentrado(ctx, 'Recuerdo sin encontrar', cx, 112, '#a08060');
-      escribirCentrado(ctx, estado.medallas.includes(av.id) || estado.nivelActual > AVENTURAS.indexOf(av) ? 'Está escondido en "' + av.nombre + '"' : 'Aventura todavía por vivir', cx, 128);
+      const vivida = estado.medallas.includes(av.id) || estado.nivelActual > AVENTURAS.indexOf(av);
+      const pista = av.fases ? 'Se consigue al completar "' + av.nombre + '"' : 'Está escondido en "' + av.nombre + '"';
+      escribirCentrado(ctx, vivida ? pista : 'Aventura todavía por vivir', cx, 128);
     }
     escribirCentrado(ctx, '< >  pasar página  ·  B: salir', cx, P.alto - 12, '#6a3a2a', null);
   }

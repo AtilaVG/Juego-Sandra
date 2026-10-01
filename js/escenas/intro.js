@@ -7,6 +7,7 @@ import { estado, guardar } from '../motor/guardado.js';
 import { crearPersona } from '../arte/personas.js';
 import { lailaFrente } from '../arte/bichos.js';
 import { MUSICA } from '../datos/musica.js';
+import { AVENTURAS } from '../datos/aventuras.js';
 import { juego } from '../juego.js';
 import { EscenaMundo } from './mundo.js';
 
@@ -45,9 +46,9 @@ export class EscenaIntro {
     yield mientras(() => (this.laila.vis = Math.max(0, this.laila.vis - 0.06)) <= 0);
     yield mientras(() => (this.alex.x = Math.max(0, this.alex.x - 0.05)) <= 0);
     yield decir([
-      A('Tu misión: revivir nuestras aventuras y conseguir las 10 MEDALLAS.'),
-      A('Cada aventura es un nivel: salta, esquiva a los bichos y recoge todos los besos que puedas.'),
-      A('Al final de cada una te espera un combate. ¡Ahí entra Laila!'),
+      A('Tu misión: revivir nuestras aventuras y conseguir las ' + AVENTURAS.length + ' MEDALLAS.'),
+      A('En cada aventura te espera algo distinto: saltar, escapar, cocinar, maquillar... ¡y algún examen!'),
+      A('Y en muchas, al final, hay un combate. ¡Ahí entra Laila!'),
       A('Yo iré siempre contigo. Si te atascas, pulsa B y te daré una pista.'),
     ]);
     let r;

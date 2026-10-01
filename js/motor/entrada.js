@@ -19,6 +19,7 @@ export const E = {
   mantenido: {}, // está apretado
   toque: null,   // toque en la pantalla (coordenadas virtuales) en este paso
   letra: null,   // letra escrita con el teclado físico en este paso
+  puntero: { x: 0, y: 0, abajo: false }, // dedo o ratón sobre la pantalla (para pintar o arrastrar)
 };
 
 const teclasAbajo = new Set();
@@ -84,12 +85,33 @@ export function iniciarEntrada(canvas) {
   });
 
   // Toques directamente sobre la pantalla del juego (menús, diálogos...).
+  let punteroId = null;
+  const moverPuntero = (e) => {
+    const v = aVirtual(e.clientX, e.clientY);
+    E.puntero.x = v.x;
+    E.puntero.y = v.y;
+  };
   canvas.addEventListener('pointerdown', (e) => {
     e.preventDefault();
     if (e.pointerType !== 'mouse') modoTeclado(false);
     avisarGesto();
     colaToques.push(aVirtual(e.clientX, e.clientY));
+    punteroId = e.pointerId;
+    try { canvas.setPointerCapture(e.pointerId); } catch { /* nada */ }
+    moverPuntero(e);
+    E.puntero.abajo = true;
   });
+  canvas.addEventListener('pointermove', (e) => {
+    if (e.pointerId === punteroId || e.pointerType === 'mouse') moverPuntero(e);
+  });
+  const soltarPuntero = (e) => {
+    if (e.pointerId !== punteroId) return;
+    punteroId = null;
+    E.puntero.abajo = false;
+  };
+  canvas.addEventListener('pointerup', soltarPuntero);
+  canvas.addEventListener('pointercancel', soltarPuntero);
+  canvas.addEventListener('lostpointercapture', soltarPuntero);
 
   // Cruceta: se decide la dirección por el ángulo respecto al centro.
   const elCruceta = document.getElementById('cruceta');
@@ -168,6 +190,7 @@ export function iniciarEntrada(canvas) {
 
 function soltarTodo() {
   teclasAbajo.clear();
+  E.puntero.abajo = false;
   cruceta.izq = cruceta.der = cruceta.arr = cruceta.abj = false;
   for (const k in botonesTactiles) botonesTactiles[k].clear();
   document.querySelectorAll('.activa, .activo').forEach((el) => el.classList.remove('activa', 'activo'));

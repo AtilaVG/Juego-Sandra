@@ -7,6 +7,7 @@ import { rect, circulo } from '../motor/dibujo.js';
 import { estado, guardar } from '../motor/guardado.js';
 import { medalla } from '../arte/medallas.js';
 import { polaroid } from '../arte/escenario.js';
+import { fotoRecuerdo } from '../arte/fotos.js';
 import { AVENTURAS } from '../datos/aventuras.js';
 import { MUSICA } from '../datos/musica.js';
 import { juego } from '../juego.js';
@@ -86,8 +87,11 @@ export class EscenaMedalla {
     ctx.restore();
 
     if (this.verFoto) {
-      const f = polaroid();
-      ctx.drawImage(f, Math.round(cx - 28), 22, 56, 64);
+      const foto = fotoRecuerdo(this.av.id);
+      if (foto) {
+        rect(ctx, Math.round(cx - 32), 20, 64, 72, '#ffffff');
+        ctx.drawImage(foto, Math.round(cx - 28), 24, 56, 56);
+      } else ctx.drawImage(polaroid(), Math.round(cx - 28), 22, 56, 64);
     } else {
       const m = medalla(this.av.id);
       const k = Math.max(0.1, this.escala) * 3;
