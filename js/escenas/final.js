@@ -45,7 +45,7 @@ export class EscenaFinal {
     entregarMedalla(av);
     yield esperar(30);
     yield decir('¡SANDRA ha conseguido la MEDALLA ATARDECER!');
-    yield decir('¡Ya tienes las 9 medallas!');
+    yield decir('¡Ya tienes las ' + AVENTURAS.length + ' medallas!');
 
     yield* this.transicion('debod');
     musica(MUSICA.atardecer);
@@ -207,7 +207,8 @@ export class EscenaFinal {
     ctx.drawImage(crearPersona('sandra').abajo[0], cx - 50, 64 - salto(0), 32, 48);
     ctx.drawImage(crearPersona('alex').abajo[0], cx - 10, 64 - salto(1), 32, 48);
     ctx.drawImage(lailaMundo(Math.floor(this.t / 20) % 2), cx + 26, 82 - salto(2), 28, 28);
-    AVENTURAS.forEach((av, i) => ctx.drawImage(medalla(av.id), cx - (AVENTURAS.length * 26) / 2 + i * 26, 124));
+    const sep = Math.min(26, Math.floor((P.ancho - 12) / AVENTURAS.length));
+    AVENTURAS.forEach((av, i) => ctx.drawImage(medalla(av.id), Math.round(cx - (AVENTURAS.length * sep) / 2 + i * sep), 124));
   }
 
   dibujarRegalo(ctx) {

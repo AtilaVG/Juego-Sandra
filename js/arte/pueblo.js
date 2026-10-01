@@ -348,6 +348,19 @@ export function edificio(b) {
       rect(ctx, 12, muroY - 12, 1, 4, '#303030');
       rect(ctx, 12, muroY - 8, 3, 1, '#303030');
       rotulo(ctx, b.rotulo, W / 2, muroY - 13, '#ffffff', '#c03030');
+    } else if (b.estilo === 'coche') {
+      // Coche aparcado (visto desde arriba y un poco de lado).
+      const [cc, cx] = lienzo(W, H);
+      rect(cx, 2, 3, W - 4, 13, '#e04848');
+      rect(cx, 1, 5, W - 2, 9, '#e04848');
+      rect(cx, 8, 3, 14, 9, '#a8d8f8');
+      rect(cx, 10, 4, 4, 3, '#e0f4ff');
+      rect(cx, 2, 13, W - 4, 3, '#b83030');
+      rect(cx, 4, 15, 6, 4, '#2a2a30');
+      rect(cx, W - 10, 15, 6, 4, '#2a2a30');
+      rect(cx, W - 3, 7, 2, 3, '#f8e880');
+      rect(cx, 22, 6, 2, 1, '#f8f8f8');
+      return contorno(cc);
     } else if (b.estilo === 'bar') {
       tejado(ctx, W, muroY + 2, '#6a8a3a');
       rect(ctx, 0, muroY, W, 36, '#f8e8c8');

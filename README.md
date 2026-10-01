@@ -4,8 +4,9 @@ Un juego con el arte de Pokémon Blanco y Negro y niveles al estilo Super Mario,
 hecho con las aventuras de Alex y Sandra.
 
 - **Pueblo (Valdemoro):** vista desde arriba como en Pokémon. Alex te sigue y te da pistas.
-- **9 aventuras:** niveles de plataformas (piscina, láser tag, Thyssen, series, cumple,
-  comida con Begoña y David, la uni, las cenas y Madrid al atardecer).
+- **10 aventuras:** niveles de plataformas (piscina, láser tag, Thyssen, series, cumple,
+  comida con Begoña y David, la uni, las cenas, la casa rural en Cuevas del Valle y
+  Madrid al atardecer).
 - **Combates:** al final de cada aventura, Laila lucha por turnos contra un jefe.
 - **Final:** Templo de Debod, pizza en el Vesubio, Salón de la Fama y la pista del regalo.
 

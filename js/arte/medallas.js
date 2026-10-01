@@ -1,4 +1,4 @@
-// Las 9 medallas (una por aventura).
+// Las medallas (una por aventura).
 import { figura, rect, circulo, elipse, poligono, silueta } from '../motor/dibujo.js';
 
 const cache = new Map();
@@ -49,6 +49,12 @@ const DIBUJOS = {
     circulo(c, 17, 8, 5, '#ffffff');
     rect(c, 6, 11, 12, 9, '#ffffff');
     rect(c, 6, 17, 12, 2, '#d0d0d8');
+  },
+  rural(c) {
+    poligono(c, [12, 2, 23, 21, 1, 21], '#7a8aa0');
+    poligono(c, [12, 2, 16, 9, 8, 9], '#ffffff');
+    poligono(c, [1, 21, 7, 14, 12, 21], '#4a8a48');
+    poligono(c, [12, 21, 18, 15, 23, 21], '#4a8a48');
   },
   madrid(c) {
     circulo(c, 12, 12, 7, '#f8a030');

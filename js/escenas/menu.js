@@ -119,17 +119,19 @@ export class MenuPausa {
   dibujarMedallas(ctx) {
     fondoPantalla(ctx, '#4a3a7a', '#2a2050');
     escribirCentrado(ctx, 'ESTUCHE DE MEDALLAS', P.ancho / 2, 8, '#ffffff', '#1a1030');
-    const cols = 3;
-    const cw = 80;
+    const cols = 4;
+    const cw = 62;
     const x0 = P.ancho / 2 - (cols * cw) / 2;
     AVENTURAS.forEach((av, i) => {
-      const x = x0 + (i % cols) * cw;
-      const y = 26 + Math.floor(i / cols) * 46;
+      const fila = Math.floor(i / cols);
+      const enFila = Math.min(cols, AVENTURAS.length - fila * cols);
+      const x = x0 + ((cols - enFila) * cw) / 2 + (i % cols) * cw;
+      const y = 22 + fila * 40;
       const tiene = estado.medallas.includes(av.id);
-      caja(ctx, x + 2, y, cw - 4, 42, { marco: tiene ? '#f8c040' : '#a0a0b0' });
-      ctx.drawImage(medalla(av.id, tiene), x + cw / 2 - 12, y + 4);
+      caja(ctx, x + 2, y, cw - 4, 37, { marco: tiene ? '#f8c040' : '#a0a0b0' });
+      ctx.drawImage(medalla(av.id, tiene), x + cw / 2 - 12, y + 3);
       const nombre = tiene ? av.medalla.replace('Medalla ', '') : '???';
-      escribirCentrado(ctx, nombre, x + cw / 2, y + 28);
+      escribirCentrado(ctx, nombre, x + cw / 2, y + 25);
     });
     ctx.drawImage(beso(), 8, P.alto - 14);
     escribir(ctx, 'Besos recogidos: ' + estado.besos, 24, P.alto - 15, '#ffffff', '#1a1030');

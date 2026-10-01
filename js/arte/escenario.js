@@ -61,6 +61,13 @@ export const TEMAS = {
     plataforma: { base: '#e8e8f0', claro: '#ffffff', osc: '#a0a0b0' },
     liquido: { base: '#f0c030', claro: '#fff090', osc: '#c89010' },
   },
+  montana: {
+    cielo: ['#7aa8f0', '#d8e8fc'],
+    suelo: { borde: '#7aa848', bordeOsc: '#55802e', relleno: '#a48a6c', linea: '#8a7258', roca: true },
+    bloque: { base: '#b0b0a8', borde: '#78786e', detalle: '#d0d0c8' },
+    plataforma: { base: '#a8784a', claro: '#c89868', osc: '#7a5432' },
+    liquido: { base: '#4aa0d0', claro: '#b0e4ff', osc: '#2a80b0' },
+  },
   madrid: {
     cielo: ['#6a5aa8', '#f8a070'],
     suelo: { borde: '#d8a070', bordeOsc: '#a06a40', relleno: '#b87a50', linea: '#9a6040' },
@@ -84,6 +91,13 @@ export function casillaSuelo(tema, arriba) {
     const [c, ctx] = lienzo(T, T);
     if (s.ajedrez) {
       for (let y = 0; y < 2; y++) for (let x = 0; x < 2; x++) rect(ctx, x * 8, y * 8, 8, 8, (x + y) % 2 ? s.relleno : s.linea);
+    } else if (s.roca) {
+      // Tierra con piedras de granito.
+      rect(ctx, 0, 0, T, T, s.relleno);
+      for (const [x, y, w] of [[2, 3, 4], [9, 6, 5], [4, 11, 3], [11, 12, 3]]) {
+        rect(ctx, x, y, w, 2, '#b8b0a4');
+        rect(ctx, x, y + 2, w, 1, s.linea);
+      }
     } else {
       rect(ctx, 0, 0, T, T, s.relleno);
       rect(ctx, 0, 7, T, 1, s.linea);
@@ -514,6 +528,46 @@ function fondoMadrid(ctx, capa, r) {
   }
 }
 
+function fondoMontana(ctx, capa, r) {
+  if (capa === 0) {
+    // Sierra de Gredos a lo lejos, con la carretera de curvas del puerto.
+    const sierras = [[0, 70, '#a8bcd8'], [110, 50, '#9cb2d0'], [230, 64, '#a8bcd8'], [330, 44, '#94aacc'], [440, 66, '#a8bcd8']];
+    for (const [x, y, col] of sierras) poligono(ctx, [x - 90, 150, x + 10, y, x + 40, y + 12, x + 150, 150], col);
+    for (const [x, y] of [[110, 50], [330, 44]]) poligono(ctx, [x - 8, y + 10, x + 10, y - 1 + 1, x + 22, y + 10], '#e8f0fa');
+    ctx.strokeStyle = '#d8d0c0';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    let px = 300;
+    let py = 140;
+    ctx.moveTo(px, py);
+    for (let i = 0; i < 6; i++) {
+      px += i % 2 ? -26 : 26;
+      py -= 12;
+      ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    rect(ctx, 0, 140, ANCHO_FONDO, 52, '#88a870');
+  } else {
+    for (let x = 0; x < ANCHO_FONDO; x += 64) elipse(ctx, x + 32, 150, 52, 22, '#6a9850');
+    for (let i = 0; i < 14; i++) {
+      const x = r() * ANCHO_FONDO;
+      const h = 18 + r() * 16;
+      rect(ctx, x - 1, 150 - 6, 3, 8, '#5a4030');
+      poligono(ctx, [x - 8, 146, x, 146 - h, x + 8, 146], '#3a6a3a');
+      poligono(ctx, [x - 6, 140 - h / 3, x, 136 - h, x + 6, 140 - h / 3], '#4a7a44');
+    }
+    for (let i = 0; i < 5; i++) elipse(ctx, r() * ANCHO_FONDO, 152, 8 + r() * 6, 5, '#b0b0a8');
+    // Casa rural de piedra.
+    const cx = 380;
+    rect(ctx, cx, 112, 46, 36, '#b8a890');
+    for (let k = 0; k < 6; k++) rect(ctx, cx + 3 + (k % 3) * 15, 116 + Math.floor(k / 3) * 12, 9, 4, '#a09078');
+    poligono(ctx, [cx - 6, 114, cx + 23, 96, cx + 52, 114], '#b0503a');
+    rect(ctx, cx + 18, 132, 10, 16, '#6a4428');
+    rect(ctx, cx + 5, 124, 8, 7, '#88c8f0');
+    rect(ctx, cx + 33, 124, 8, 7, '#88c8f0');
+  }
+}
+
 const FONDOS = {
   piscina: fondoPiscina,
   lasertag: fondoLaser,
@@ -523,6 +577,7 @@ const FONDOS = {
   comedor: fondoComedor,
   uni: fondoUni,
   cocina: fondoCocina,
+  montana: fondoMontana,
   madrid: fondoMadrid,
 };
 

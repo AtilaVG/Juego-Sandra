@@ -120,6 +120,19 @@ export const JEFES = {
     ],
     derrota: '¡El AGUACATE DURO por fin está en su punto!',
   },
+  cabraMontes: {
+    nombre: 'CABRA MONTÉS',
+    entrada: '¡Una CABRA MONTÉS de Gredos te corta el paso!',
+    fondo: ['#8ac0f8', '#e0f0ff', '#7aa050'],
+    debil: 'bufido',
+    pista: 'Las cabras se asustan con los bufidos... ¡Prueba el Bufido de Laila!',
+    ataques: [
+      { nombre: 'Cornada', tipo: 'dano', poder: 1.2 },
+      { nombre: 'Balido', tipo: 'dano', poder: 1, texto: '¡Meeeeeeeh!' },
+      { nombre: 'Posar en una roca', tipo: 'nada', texto: 'Se sube a una roca a posar. Muy fotogénica.' },
+    ],
+    derrota: '¡La CABRA MONTÉS se marcha monte arriba!',
+  },
   alex: {
     nombre: 'CAMPEÓN ALEX',
     entrada: '¡El CAMPEÓN ALEX te desafía!',

@@ -518,6 +518,18 @@ export class EscenaPlataformas {
       const d = temploDebod();
       ctx.drawImage(d, this.meta.x - 60 - cam, 160 - d.height);
     }
+    if (this.av.amigos && this.meta) {
+      // El mirador: barandilla y los amigos esperando para la foto.
+      const bx = this.meta.x + 16 - cam;
+      for (let x = 0; x < 72; x += 12) rect(ctx, bx + x, 140, 2, 20, '#7a4a30');
+      rect(ctx, bx, 140, 74, 2, '#8a5a3a');
+      rect(ctx, bx, 150, 74, 2, '#8a5a3a');
+      this.av.amigos.forEach((nombre, i) => {
+        const p = crearPersona(nombre);
+        const salta = this.modo === 'meta' && Math.floor(this.t / 10 + i) % 2 ? 2 : 0;
+        ctx.drawImage(p.izq[0], bx + 8 + i * 20, 160 - 23 - salta);
+      });
+    }
 
     // Casillas.
     const x0 = Math.max(0, Math.floor(cam / T));

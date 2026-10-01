@@ -74,6 +74,7 @@ export const CARTELES = {
   '31,15': ['Casa de Alex', 'Cuidado: dentro vive un abuelete.'],
   '13,22': ['PISCINA MUNICIPAL', 'Abierta en verano. Prohibido hacer bombas. (Sí, a ti.)'],
   '34,22': ['ESTACIÓN DE VALDEMORO', 'Trenes a Madrid cada pocos minutos.'],
+  '33,18': ['ESCAPADA RURAL', 'Destino: Cuevas del Valle (Ávila). ¡Todos al coche!'],
   '24,8': ['PLAZA DE LA CONSTITUCIÓN', 'El centro de Valdemoro.'],
 };
 for (const k in CARTELES) {
@@ -95,6 +96,7 @@ export const EDIFICIOS = [
   { id: 'casa1', x: 16, y: 14, w: 4, h: 3, estilo: 'casa', techo: '#5aa060', puerta: null },
   { id: 'casa2', x: 23, y: 13, w: 3, h: 3, estilo: 'casa', techo: '#c0884a', puerta: null },
   { id: 'bar', x: 5, y: 19, w: 4, h: 3, estilo: 'bar', rotulo: 'BAR', puerta: 7 },
+  { id: 'coche', x: 31, y: 18, w: 2, h: 1, estilo: 'coche', puerta: 31 },
 ];
 
 // Qué pasa al entrar por cada puerta. "niveles" en orden de la historia.
@@ -104,6 +106,7 @@ export const PUERTAS = {
   casaAlex: { niveles: ['cumple', 'cenas'] },
   piscina: { niveles: ['piscina'] },
   estacion: { niveles: ['thyssen', 'uni', 'madrid'] },
+  coche: { niveles: ['rural'] },
   ayuntamiento: { texto: ['El Ayuntamiento de Valdemoro.', 'Está cerrado. Pone: "Vuelva usted mañana".'] },
   curro: {
     texto: [
@@ -121,7 +124,7 @@ export const VECINOS = [
   {
     id: 'laila', x: 8, y: 15, gato: true,
     dice: (e) =>
-      e.medallas.length >= 9
+      e.finalVisto
         ? ['Laila se frota contra tus piernas.', '¡Hasta Laila está orgullosa de ti! ♥']
         : ['Laila te mira fijamente...', '...y se gira. Es algo suya.', 'Pero luego vuelve y se deja acariciar. Es maja. ♥'],
   },
@@ -142,21 +145,27 @@ export const VECINOS = [
   {
     id: 'bea', x: 22, y: 8, dir: 'abj', persona: PERSONAJES.bea,
     dice: (e) =>
-      e.medallas.length >= 9
+      e.finalVisto
         ? ['BEA: ¡Lo has conseguido! Ya sabía yo que eras la mejor.']
-        : ['BEA: ¡Tía! ¿Qué tal con Alex?', 'BEA: Se os ve tan bien juntos... ¡Me alegro un montón!'],
+        : e.medallas.includes('rural')
+          ? ['BEA: ¡Qué bien lo pasamos en la casa rural de Cuevas del Valle!', 'BEA: Tenemos que repetir. ¡Ya!']
+          : ['BEA: ¡Tía! ¿Qué tal con Alex?', 'BEA: Se os ve tan bien juntos... ¡Me alegro un montón!'],
   },
   {
     id: 'jaime', x: 4, y: 8, dir: 'abj', persona: PERSONAJES.jaime,
     dice: (e) =>
-      e.medallas.includes('lasertag')
+      e.medallas.includes('rural')
+        ? ['JAIME: Lo de Gredos fue épico. Las vistas del mirador... ¡y la cena!']
+        : e.medallas.includes('lasertag')
         ? ['JAIME: Revancha en el láser tag cuando quieras. Esta vez gano yo.']
         : ['JAIME: ¿Vienes al láser tag? Rubén dice que es imbatible.', 'JAIME: (Spoiler: no lo es.)'],
   },
   {
     id: 'ruben', x: 5, y: 8, dir: 'abj', persona: PERSONAJES.ruben,
     dice: (e) =>
-      e.medallas.includes('lasertag')
+      e.medallas.includes('rural')
+        ? ['RUBÉN: Sigo pensando en esa casa rural. Y en las cabras. Sobre todo en las cabras.']
+        : e.medallas.includes('lasertag')
         ? ['RUBÉN: Nos ganaste bien... pero no se lo digas a nadie.']
         : ['RUBÉN: En el láser tag soy una leyenda.', 'RUBÉN: Bueno, eso dice mi madre.'],
   },
