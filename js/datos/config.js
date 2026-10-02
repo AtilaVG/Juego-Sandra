@@ -114,11 +114,14 @@ export const PERSONAJES = {
   },
 };
 
-// Laila, la gata. TODO(Alex): ajusta los colores cuando me pases una foto.
+// Laila, la gata (sacada de las fotos): tricolor, blanca con manchas naranjas
+// y oscuras en el lomo, la cabeza y la cola atigradas y los ojos verdes.
 export const LAILA = {
-  base: '#8c8c94',
-  rayas: '#5a5a62',
-  pecho: '#e8e8ec',
-  ojos: '#a8c840',
-  nariz: '#e89aa8',
+  blanco: '#f4f0e8',
+  naranja: '#d4843c',
+  oscuro: '#463a32',
+  atigrado: '#8a7c6a',
+  rayas: '#4e443a',
+  ojos: '#b4c444',
+  nariz: '#eca2ac',
 };
