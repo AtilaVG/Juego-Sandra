@@ -17,7 +17,7 @@ Estas reglas las ha pedido el dueño del repo y se aplican siempre, en todas las
 
 ## Proyecto
 - Juego para Sandra (regalo de Alex): HTML + JavaScript (módulos ES) sin dependencias ni compilación; se publica con GitHub Pages desde `main`.
-- `js/motor/` (pantalla, entrada, audio, fuente, UI), `js/arte/` (sprites dibujados por código), `js/datos/` (textos, mapas, configuración), `js/escenas/` (título, intro, pueblo, plataformas, combate, medalla, final y minijuegos: tiro, laberinto, tartas, maquillaje, examen, atrapar).
+- `js/motor/` (pantalla, entrada, audio, fuente, UI), `js/arte/` (sprites dibujados por código), `js/datos/` (textos, mapas, configuración), `js/escenas/` (título, intro, pueblo, plataformas, combate, medalla, final y minijuegos: tiro, laberinto, tartas, mando, velas, patadita, maquillaje, examen, atrapar).
 - Cada aventura tiene `fases` (por defecto plataformas) y `jefe` opcional; `js/escenas/flujo.js` las encadena. Los minijuegos heredan de `js/escenas/minijuego.js`.
 - Lo personalizable (pista del regalo, carta final, colores) está en `js/datos/config.js`.
 - Para probar: servir la carpeta (`npx http-server .`) y usar `?prueba=mundo`, `?prueba=nivel:<id>`, `?prueba=combate:<jefe>`, `?prueba=aventura:<id>`, `?prueba=mini:<tipo>-<aventura>` o `?prueba=final`. Comprobar siempre en vista de iPad (1180x820) y con capturas.
