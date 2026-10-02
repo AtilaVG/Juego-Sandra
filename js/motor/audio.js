@@ -311,6 +311,8 @@ export const sfx = {
   subirNivel: () => notas(['C5', 'E5', 'G5', 'C6', 'G5', 'C6', 'E6'], { paso: 0.08, dur: 0.12, vol: 0.1 }),
   campana: () => notas(['E6', 'G6', 'E7'], { onda: 0.125, paso: 0.1, dur: 0.4, vol: 0.08 }),
   laser: () => tono({ onda: 0.25, desde: 1800, hasta: 300, dur: 0.18, vol: 0.08 }),
+  nota: (n, dur = 0.32) => tono({ onda: 0.25, desde: frec(midi(n)), dur, vol: 0.1 }),
+  soplido: () => chasquido({ dur: 0.7, vol: 0.18, filtro: 900, tipo: 'lowpass' }),
   telefono: () => {
     for (let i = 0; i < 2; i++)
       for (let j = 0; j < 8; j++) tono({ onda: 0.5, desde: j % 2 ? 1300 : 1100, dur: 0.04, vol: 0.05, t: i * 0.7 + j * 0.045 });

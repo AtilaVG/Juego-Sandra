@@ -80,6 +80,28 @@ function cancion({ bpm, melodia, acordes, estiloBajo, bateria, compases, duty = 
   return { bpm, canales, bucle, volumen };
 }
 
+// Cumpleaños feliz (melodía popular, de dominio público), por frases.
+const CUMPLE = [
+  { melodia: 'G4:3 G4:1 A4:4 G4:4 C5:4 B4:8', acordes: 'C:12 G:12' },
+  { melodia: 'G4:3 G4:1 A4:4 G4:4 D5:4 C5:8', acordes: 'G:12 C:12' },
+  { melodia: 'G4:3 G4:1 G5:4 E5:4 C5:4 B4:4 A4:4', acordes: 'C:12 F:12' },
+  { melodia: 'F5:3 F5:1 E5:4 C5:4 D5:4 C5:12', acordes: 'F:4 G:12 C:12' },
+];
+const frasesCumple = (frases) =>
+  cancion({
+    bpm: 112,
+    melodia: frases.map((f) => f.melodia).join(' '),
+    acordes: frases.map((f) => f.acordes).join(' '),
+    estiloBajo: 'suave',
+    arp: false,
+    duty: 0.5,
+    bucle: false,
+    vibrato: true,
+  });
+
+export const LETRA_CUMPLE = ['Cumpleaños feliz', 'cumpleaños feliz', 'te deseamos todos', 'cumpleaños feliz'];
+export const CUMPLEANOS = { frases: CUMPLE.map((f) => frasesCumple([f])), entera: frasesCumple(CUMPLE) };
+
 export const MUSICA = {
   titulo: cancion({
     bpm: 128,

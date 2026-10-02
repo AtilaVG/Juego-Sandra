@@ -11,6 +11,9 @@ import { EscenaTartas } from './tartas.js';
 import { EscenaExamen } from './examen.js';
 import { EscenaAtrapar } from './atrapar.js';
 import { EscenaMaquillaje } from './maquillaje.js';
+import { EscenaMando } from './mando.js';
+import { EscenaVelas } from './velas.js';
+import { EscenaPatadita } from './patadita.js';
 
 export const ESCENAS = {
   plataformas: EscenaPlataformas,
@@ -20,6 +23,9 @@ export const ESCENAS = {
   examen: EscenaExamen,
   atrapar: EscenaAtrapar,
   maquillaje: EscenaMaquillaje,
+  mando: EscenaMando,
+  velas: EscenaVelas,
+  patadita: EscenaPatadita,
 };
 
 export function fasesDe(av) {

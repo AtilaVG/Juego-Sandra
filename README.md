@@ -5,10 +5,12 @@ hecho con las aventuras de Alex y Sandra.
 
 - **Pueblo (Valdemoro):** vista desde arriba como en Pokémon. Alex te sigue y te da pistas.
 - **11 aventuras**, cada una con su forma de jugar:
-  - Plataformas tipo Mario: piscina, noche de series, cumple, comida con Begoña y David,
-    casa rural en Cuevas del Valle y Madrid al atardecer.
+  - Plataformas tipo Mario: piscina, casa rural en Cuevas del Valle y Madrid al atardecer.
   - Láser tag: galería de tiro (¡a Bea no, que va en tu equipo!).
   - Thyssen: escapar del vigilante en un laberinto y hacer tartas de queso en Luna and Wanda.
+  - Noche de series: encontrar el mando que Laila esconde debajo de los cojines (como los trileros).
+  - Cumple: repetir el orden de las velas de la tarta y cantar el cumpleaños feliz.
+  - Comida con Begoña y David: darle una patadita a Alex por debajo de la mesa cuando va a meter la pata.
   - Noche de maquillaje: maquillar a Alex con el dedo (la foto se guarda en el álbum).
   - La uni: examen tipo test sobre vosotros.
   - Cenas: atrapar al vuelo los ingredientes.
