@@ -15,6 +15,7 @@ export const OBJETOS = {
 };
 
 // ataques: { nombre, tipo: 'dano' | 'nada' | 'curar', poder, texto }
+// especial (opcional): un ataque más fuerte que el jefe usa una sola vez, con aviso.
 export const JEFES = {
   flamenco: {
     nombre: 'FLAMENCO HINCHABLE',
@@ -143,8 +144,14 @@ export const JEFES = {
       { nombre: 'Chiste malo', tipo: 'dano', poder: 1.1, texto: '¡Es tan malo que duele!' },
       { nombre: 'Quejarse de la espalda', tipo: 'nada', texto: '"Ay, mi espalda..." ¡No es muy eficaz! Abuelete...' },
       { nombre: 'Siesta de abuelete', tipo: 'curar', poder: 0.15, texto: 'Se echa una siestecita y recupera fuerzas.' },
-      { nombre: 'Llamarte bebe', tipo: 'dano', poder: 1.2, texto: 'Sandra se sonroja... ¡y Laila se despista!' },
     ],
+    // Ataque especial: lo usa una vez, cuando le queda la mitad de PS.
+    especial: {
+      nombre: 'COSQUILLAS',
+      tipo: 'dano',
+      poder: 1.5,
+      texto: ['¡Sandra tiene MUCHÍSIMAS cosquillas!', 'No puede parar de reír... y Laila no sabe dónde meterse.'],
+    },
     derrota: '¡El CAMPEÓN ALEX se rinde! "Me has ganado... en todo", dice.',
   },
 };

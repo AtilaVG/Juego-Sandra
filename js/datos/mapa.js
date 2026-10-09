@@ -111,7 +111,7 @@ export const PUERTAS = {
   curro: {
     texto: [
       'EL CURRO. Aquí fue donde os conocisteis.',
-      { quien: 'Alex', texto: 'Quién nos iba a decir que de aquí saldría todo esto, ¿eh, bebe?' },
+      { quien: 'Alex', texto: 'Quién nos iba a decir que de aquí saldría todo esto, ¿eh, cariño?' },
     ],
   },
   bar: { texto: ['El bar del barrio. Huele a tortilla recién hecha.', 'Hoy no hay tiempo para cañas: ¡hay aventuras pendientes!'] },
@@ -132,15 +132,15 @@ export const VECINOS = [
     id: 'begona', x: 8, y: 13, dir: 'abj', persona: PERSONAJES.begona,
     dice: (e) =>
       e.medallas.includes('comida')
-        ? ['BEGOÑA: Alex es muy majo. Y come de todo, ¡eso me gusta!']
-        : ['BEGOÑA: ¡Hola, cariño! ¿Otra aventura con Alex?', 'BEGOÑA: Cuando queráis venís a comer, que hago de sobra.'],
+        ? ['BEGOÑA: Alex es muy majo. Eso sí, dibujando es un desastre.']
+        : ['BEGOÑA: ¡Hola, cariño! ¿Otra aventura con Alex?', 'BEGOÑA: Cuando queráis venís y echamos una partida.'],
   },
   {
     id: 'david', x: 9, y: 13, dir: 'abj', persona: PERSONAJES.david,
     dice: (e) =>
       e.medallas.includes('comida')
-        ? ['DAVID: El chaval aprobó el examen de la comida. Buena señal.']
-        : ['DAVID: Si ves a Alex, dile que traiga postre.'],
+        ? ['DAVID: El chaval dibuja fatal, pero me cae bien.']
+        : ['DAVID: Si ves a Alex, dile que esta vez el Pictionary lo gano yo.'],
   },
   {
     id: 'bea', x: 22, y: 8, dir: 'abj', persona: PERSONAJES.bea,

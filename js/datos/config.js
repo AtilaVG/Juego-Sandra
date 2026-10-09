@@ -6,27 +6,9 @@
 // Pregunta del principio, para que solo Sandra pueda jugar.
 export const CLAVE = {
   pregunta: '¿Cómo te llama Alex?',
-  respuestas: ['BEBE'], // se comparan sin tildes y en mayúsculas
-  pista: 'Pista: empieza por B y lo oyes muchas veces al día...',
+  respuestas: ['CARIÑO', 'AMOR'], // se comparan sin tildes y en mayúsculas (CARINO también vale)
+  pista: 'Pista: empieza por C y lo oyes muchas veces al día...',
 };
-
-// La pista del regalo que aparece al final del juego.
-// TODO(Alex): cambia este texto por la pista de verdad.
-export const PISTA_REGALO = [
-  'Tu regalo de verdad no está en este juego...',
-  'Busca donde guardamos las cosas importantes. ♥',
-];
-
-// Carta final de Alex (se muestra en el Templo de Debod, al atardecer).
-export const CARTA_FINAL = [
-  'Bebe, si has llegado hasta aquí es que te has pasado todas nuestras aventuras.',
-  'Desde que nos conocimos currando, cada plan contigo se ha convertido en un recuerdo bonito.',
-  'La piscina, el láser tag, el Thyssen, las tartas de queso, las series en el sofá, la noche de maquillaje, las cenas, la casa rural en Gredos...',
-  'Gracias por aguantar a este abuelete, por las risas y por hacer que todo sea mejor.',
-  'Feliz mesario, Sandra. Te quiero muchísimo.',
-];
-
-export const FECHA = '8 de octubre';
 
 // Aspecto de los personajes (sacado de las fotos).
 // pelo: 'recogido' | 'corto' | 'largo' | 'coleta'

@@ -5,15 +5,18 @@ hecho con las aventuras de Alex y Sandra.
 
 - **Pueblo (Valdemoro):** vista desde arriba como en Pokémon. Alex te sigue y te da pistas.
 - **11 aventuras**, cada una con su forma de jugar:
-  - Plataformas tipo Mario: piscina, noche de series, cumple, comida con Begoña y David,
-    casa rural en Cuevas del Valle y Madrid al atardecer.
+  - Plataformas tipo Mario: piscina, casa rural en Cuevas del Valle y Madrid al atardecer.
   - Láser tag: galería de tiro (¡a Bea no, que va en tu equipo!).
   - Thyssen: escapar del vigilante en un laberinto y hacer tartas de queso en Luna and Wanda.
+  - Noche de series: encontrar el mando que Laila esconde debajo de los cojines (como los trileros).
+  - Cumple: repetir el orden de las velas de la tarta y cantar el cumpleaños feliz.
+  - Juegos de mesa con Begoña y David: el del 1% (preguntas cada vez más difíciles)
+    y un Pictionary en el que Alex dibuja fatal.
   - Noche de maquillaje: maquillar a Alex con el dedo (la foto se guarda en el álbum).
   - La uni: examen tipo test sobre vosotros.
   - Cenas: atrapar al vuelo los ingredientes.
 - **Combates:** al final de muchas aventuras, Laila lucha por turnos contra un jefe.
-- **Final:** Templo de Debod, pizza en el Vesubio, Salón de la Fama y la pista del regalo.
+- **Final:** Templo de Debod, pizza en el Vesubio, Salón de la Fama y un te quiero.
 
 ## Cómo se juega
 
@@ -32,9 +35,7 @@ La partida se guarda sola en el propio dispositivo.
 
 Casi todo lo personal está en `js/datos/config.js`:
 
-- `CLAVE`: la pregunta del principio (por defecto "¿Cómo te llama Alex?" → BEBE).
-- `PISTA_REGALO`: la pista del regalo que sale al final.
-- `CARTA_FINAL`: el mensaje de Alex en el Templo de Debod.
+- `CLAVE`: la pregunta del principio (por defecto "¿Cómo te llama Alex?" → CARIÑO; también vale AMOR).
 - `PERSONAJES` y `LAILA`: colores y aspecto de cada personaje.
 
 Los textos, mapas y fases de cada aventura están en `js/datos/aventuras.js`, los jefes en `js/datos/jefes.js`
