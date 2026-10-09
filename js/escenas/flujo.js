@@ -13,7 +13,8 @@ import { EscenaAtrapar } from './atrapar.js';
 import { EscenaMaquillaje } from './maquillaje.js';
 import { EscenaMando } from './mando.js';
 import { EscenaVelas } from './velas.js';
-import { EscenaPatadita } from './patadita.js';
+import { EscenaUnoPorCiento } from './porciento.js';
+import { EscenaPictionary } from './pictionary.js';
 
 export const ESCENAS = {
   plataformas: EscenaPlataformas,
@@ -25,7 +26,8 @@ export const ESCENAS = {
   maquillaje: EscenaMaquillaje,
   mando: EscenaMando,
   velas: EscenaVelas,
-  patadita: EscenaPatadita,
+  porciento: EscenaUnoPorCiento,
+  pictionary: EscenaPictionary,
 };
 
 export function fasesDe(av) {

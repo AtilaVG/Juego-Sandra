@@ -79,7 +79,7 @@ export class EscenaVelas extends Minijuego {
 
   jugar() {
     this.tEstado++;
-    for (let i = 0; i < VELAS.length; i++) if (this.encendida[i] > 0 && this.estado !== 'soplar' && this.estado !== 'cantar') this.encendida[i]--;
+    for (let i = 0; i < VELAS.length; i++) if (this.encendida[i] > 0 && !['cantar', 'soplar', 'soplando'].includes(this.estado)) this.encendida[i]--;
 
     if (this.estado === 'mostrar') {
       const ciclo = this.tOn + this.tOff;
@@ -129,10 +129,24 @@ export class EscenaVelas extends Minijuego {
         this.estado = 'soplar';
         this.tEstado = 0;
         this.letra = null;
-        this.bocadillo = { texto: '¡Sopla las velas, bebe! Pulsa A o toca la tarta.', t: 9999 };
+        this.bocadillo = { texto: '¡Ahora que sople mi madre! Pulsa A o toca la tarta.', t: 9999 };
       }
     } else if (this.estado === 'soplar') {
-      if (E.pulsado.a || (E.toque && dentro(E.toque, P.ancho / 2 - 80, TARTA - 50, 160, 100))) this.soplar();
+      if (E.pulsado.a || (E.toque && dentro(E.toque, P.ancho / 2 - 80, TARTA - 50, 160, 100))) {
+        this.estado = 'soplando';
+        this.tEstado = 0;
+        this.bocadillo = null;
+        sfx.soplido();
+      }
+    } else if (this.estado === 'soplando') {
+      // La madre de Alex sopla desde la derecha: se apagan de una en una.
+      const t = this.tEstado - 10;
+      if (t > 0 && t % 7 === 0 && t / 7 <= VELAS.length) {
+        const i = VELAS.length - t / 7;
+        this.encendida[i] = 0;
+        for (let k = 0; k < 4; k++) this.humo.push({ x: this.xVela(i) + (Math.random() - 0.5) * 3, y: TARTA - 26, t: 50 + k * 12 });
+      }
+      if (this.tEstado > 50) this.terminarCumple();
     }
   }
 
@@ -158,13 +172,7 @@ export class EscenaVelas extends Minijuego {
     }
   }
 
-  soplar() {
-    sfx.soplido();
-    this.encendida.fill(0);
-    this.bocadillo = null;
-    for (let i = 0; i < VELAS.length; i++) {
-      for (let k = 0; k < 4; k++) this.humo.push({ x: this.xVela(i) + (Math.random() - 0.5) * 3, y: TARTA - 26, t: 50 + k * 12 });
-    }
+  terminarCumple() {
     for (let k = 0; k < 50; k++) {
       this.confeti.push({
         x: Math.random() * P.ancho,
@@ -174,7 +182,7 @@ export class EscenaVelas extends Minijuego {
       });
     }
     this.estado = 'soplado';
-    this.ganar('¡Feliz cumple! Toda la familia aplaude.');
+    this.ganar('¡Mi madre ha soplado todas las velas! Toda la familia aplaude.');
   }
 
   animarFin() {
@@ -237,6 +245,17 @@ export class EscenaVelas extends Minijuego {
       if (h.t > 0 && h.t < 50) circulo(ctx, h.x, h.y, 2 + (50 - h.t) / 14, 'rgba(200,200,210,' + (h.t / 70) + ')');
     }
     this.humo = this.humo.filter((h) => h.t > 0);
+
+    if (this.estado === 'soplando') {
+      // La madre de Alex soplando.
+      const mx = cx + 74;
+      for (let k = 0; k < 4; k++) {
+        const d = 10 + ((this.t * 3 + k * 23) % 80);
+        rect(ctx, Math.round(mx - d), TARTA - 38 + k * 5, 9, 1, '#a8d8f8');
+      }
+      caja(ctx, mx - 8, MESA - 84, 48, 18, { marco: '#a8d8f8' });
+      escribirCentrado(ctx, '¡Fuuu!', mx + 16, MESA - 80, '#3a78c8');
+    }
 
     if (this.estado === 'turno') {
       const x = Math.round(this.xVela(this.sel));

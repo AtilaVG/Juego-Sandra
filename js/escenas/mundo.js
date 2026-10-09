@@ -75,7 +75,7 @@ export class EscenaMundo {
         (function* () {
           yield esperar(20);
           yield decir([
-            A('¡Bienvenida a Valdemoro, bebe!'),
+            A('¡Bienvenida a Valdemoro, cariño!'),
             A('Si no sabes a dónde ir, busca la señal amarilla con una "!" o mírame y pulsa A para que te dé una pista.'),
             A('Arriba a la izquierda verás siempre nuestro siguiente objetivo.'),
             A('Primera parada: ' + sig.objetivo.toLowerCase() + '. ' + sig.donde),
@@ -239,7 +239,7 @@ export class EscenaMundo {
     const sig = siguienteAventura();
     const msgs = sig
       ? [A('Ahora toca: ' + sig.objetivo.toLowerCase() + '.'), A(sig.donde)]
-      : [A('¡Lo has completado todo, bebe!'), A('Gracias por jugar. Te quiero muchísimo. ♥')];
+      : [A('¡Lo has completado todo, cariño!'), A('Gracias por jugar. Te quiero muchísimo. ♥')];
     if (sig && Math.random() < 0.35) msgs.unshift(A(['Te sigo a donde vayas.', 'Qué bien se está contigo.', '¿Te he dicho hoy lo guapa que estás?'][Math.floor(Math.random() * 3)]));
     this.decir(msgs);
   }

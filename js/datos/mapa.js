@@ -111,7 +111,7 @@ export const PUERTAS = {
   curro: {
     texto: [
       'EL CURRO. Aquí fue donde os conocisteis.',
-      { quien: 'Alex', texto: 'Quién nos iba a decir que de aquí saldría todo esto, ¿eh, bebe?' },
+      { quien: 'Alex', texto: 'Quién nos iba a decir que de aquí saldría todo esto, ¿eh, cariño?' },
     ],
   },
   bar: { texto: ['El bar del barrio. Huele a tortilla recién hecha.', 'Hoy no hay tiempo para cañas: ¡hay aventuras pendientes!'] },

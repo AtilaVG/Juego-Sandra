@@ -245,7 +245,12 @@ export class EscenaCombate {
     let opciones = d.ataques;
     if (this.turno <= 1) opciones = opciones.filter((a) => a.tipo === 'dano');
     if (this.enemigoPs >= this.enemigoMax) opciones = opciones.filter((a) => a.tipo !== 'curar');
-    const a = opciones[Math.floor(Math.random() * opciones.length)];
+    let a = opciones[Math.floor(Math.random() * opciones.length)];
+    if (d.especial && !this.especialUsado && this.enemigoPs <= this.enemigoMax / 2) {
+      this.especialUsado = true;
+      a = d.especial;
+      yield decir('¡' + d.nombre + ' prepara su ATAQUE ESPECIAL!');
+    }
     yield decir('¡' + d.nombre + ' usó ' + a.nombre + '!');
     if (a.tipo === 'dano') {
       this.efecto = { tipo: 'impacto', t: 0, dur: 24 };

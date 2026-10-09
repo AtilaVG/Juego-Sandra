@@ -69,7 +69,7 @@ export class EscenaFinal {
     yield* this.transicion('regalo');
     musica(MUSICA.intro);
     yield esperar(30);
-    yield decir([A('Una última cosa, bebe...'), ...PISTA_REGALO.map(A)]);
+    yield decir([A('Una última cosa, cariño...'), ...PISTA_REGALO.map(A)]);
 
     yield* this.transicion('creditos');
     estado.finalVisto = true;
@@ -231,7 +231,7 @@ export class EscenaFinal {
     escribirCentrado(ctx, 'FIN', cx, 22, '#f8d030', null, 3);
     escribirCentrado(ctx, 'Hecho con muchísimo amor', cx, 70, '#ffffff', null);
     escribirCentrado(ctx, 'por Alex (tu abuelete)', cx, 84, '#ffffff', null);
-    escribirCentrado(ctx, 'para Sandra (su bebe)', cx, 98, '#ff8ab0', null);
+    escribirCentrado(ctx, 'para Sandra, con todo su cariño', cx, 98, '#ff8ab0', null);
     escribirCentrado(ctx, FECHA + ' · feliz mesario ♥', cx, 122, '#f8d030', null);
     ctx.drawImage(beso(), cx - 6, 140);
     escribirCentrado(ctx, 'Besos recogidos: ' + estado.besos, cx, 154, '#a0a0b8', null);

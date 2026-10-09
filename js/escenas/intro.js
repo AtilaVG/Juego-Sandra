@@ -30,7 +30,7 @@ export class EscenaIntro {
     yield esperar(30);
     yield mientras(() => (this.alex.vis = Math.min(1, this.alex.vis + 0.04)) >= 1);
     yield decir([
-      A('¡Hola, bebe! ¡Bienvenida al mundo de VALDEMORO!'),
+      A('¡Hola, cariño! ¡Bienvenida al mundo de VALDEMORO!'),
       A('Me llamo ALEX... aunque tú me llamas ABUELETE.'),
       A('Este mundo está lleno de recuerdos: piscinas, láseres, tartas de queso, series en el sofá...'),
       A('Todo empezó currando juntos. Y aquí, en Valdemoro, empezamos a salir.'),
@@ -65,7 +65,7 @@ export class EscenaIntro {
     } while (r === 0 && (yield preguntar([A('¿Te lo repito?')], ['No, ya está', 'Sí'])) === 1);
 
     yield mientras(() => (this.sandra.vis = Math.min(1, this.sandra.vis + 0.04)) >= 1);
-    yield decir([A('Y tú eres SANDRA. Mi bebe.'), A('¿Lista para la aventura?')]);
+    yield decir([A('Y tú eres SANDRA. Mi cariño.'), A('¿Lista para la aventura?')]);
     let lista = yield preguntar([A('¿Empezamos?')], ['¡Sí!', 'Todavía no']);
     while (lista !== 0) {
       lista = yield preguntar([A('Venga, que no se diga... ¿Empezamos?')], ['¡Sí!', 'Que no']);

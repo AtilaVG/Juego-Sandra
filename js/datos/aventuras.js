@@ -1,5 +1,5 @@
 // Las aventuras en orden. Cada una tiene una o varias fases (plataformas por defecto,
-// o minijuegos: tiro, laberinto, tartas, mando, velas, patadita, maquillaje, examen, atrapar). Cada mapa tiene 12 filas.
+// o minijuegos: tiro, laberinto, tartas, mando, velas, porciento, pictionary, maquillaje, examen, atrapar). Cada mapa tiene 12 filas.
 // Leyenda: '.' aire  '#' suelo  'B' bloque  '=' plataforma (se atraviesa desde abajo)
 //          '?' bloque regalo  'o' beso  'c' corazón  'R' recuerdo  'C' bandera de Alex
 //          'G' meta  'S' salida  'w' bicho que anda  'f' bicho que vuela  'h' bicho que salta
@@ -264,19 +264,38 @@ export const AVENTURAS = [
     medalla: 'Medalla Aprobado',
     objetivo: 'Ir a casa de Sandra (comida con Begoña y David)',
     donde: 'Otra vez a tu casa, la del tejado rojo. Hoy toca comer con tu madre y con David.',
-    intro: [
-      A('Hoy como con tu madre y con David. Estoy... tranquilísimo.'),
-      A('(No estoy nada tranquilo.)'),
-      A('Si ves que voy a soltar alguna tontería, dame una patadita por debajo de la mesa. ¡Pero solo si hace falta!'),
+    intro: [A('Hoy como con tu madre y con David. Estoy... tranquilísimo.'), A('(No estoy nada tranquilo.)')],
+    fases: [
+      {
+        tipo: 'porciento',
+        intro: [
+          A('Hoy como con tu madre y con David. Estoy... tranquilísimo.'),
+          A('(No estoy nada tranquilo.)'),
+          A('Después de comer, Begoña saca los juegos de mesa. Primero, el del 1%.'),
+          A('Las preguntas empiezan fáciles y cada vez son más difíciles. La última solo la acierta el 1%.'),
+          A('Si te atascas, pulsa B o toca la tarjeta y te soplo una pista.'),
+        ],
+        recuerdo: false,
+      },
+      {
+        tipo: 'pictionary',
+        intro: [
+          A('¡Ahora Pictionary! Dibujo yo y tú adivinas.'),
+          A('Aviso: dibujo fatal. Pero fatal de verdad.'),
+          A('Elige la respuesta en cuanto lo sepas, que Begoña y David también juegan.'),
+        ],
+        pistas: [
+          'Elige con la cruceta y pulsa A, o toca la respuesta.',
+          'Mira los colores: es lo único que hago bien.',
+          'Si fallas no pasa nada: sigo dibujando hasta que lo adivines.',
+        ],
+      },
     ],
-    pistas: [
-      'Pulsa A o toca la pantalla para darme la patadita.',
-      'Lee lo que voy diciendo: si es algo bonito, déjame terminar.',
-      'Si me voy a meter en un lío... ¡patadita antes de que acabe la frase!',
-    ],
-    fases: [{ tipo: 'patadita' }],
-    recuerdo: { titulo: 'Examen superado', texto: 'El día que comí con Begoña y David. Nervios al principio y risas al final.' },
-    despues: [A('¡Creo que les caí bien! David hasta se rió con mis chistes. Con uno.')],
+    recuerdo: {
+      titulo: 'Tarde de juegos de mesa',
+      texto: 'La comida con Begoña y David, y después juegos de mesa: el del 1% y un Pictionary en el que yo dibujaba fatal.',
+    },
+    despues: [A('¡Creo que les caí bien! Eso sí: mis dibujos del Pictionary no los van a olvidar nunca.')],
   },
 
   // ------------------------------------------------------------------ 7
@@ -290,7 +309,7 @@ export const AVENTURAS = [
     donde: 'A tu casa, la del tejado rojo. Esta noche el modelo soy yo...',
     intro: [
       A('Hoy toca noche de maquillaje... y el modelo soy yo.'),
-      A('Me pongo la diadema de orejitas, me quito las gafas y... ¡hazme lo que quieras, bebe!'),
+      A('Me pongo la diadema de orejitas, me quito las gafas y... ¡hazme lo que quieras, cariño!'),
       A('Pinta con el dedo encima de mi cara. Abajo a la derecha tienes las pinturas.'),
     ],
     pistas: [],
