@@ -10,13 +10,13 @@ hecho con las aventuras de Alex y Sandra.
   - Thyssen: escapar del vigilante en un laberinto y hacer tartas de queso en Luna and Wanda.
   - Noche de series: encontrar el mando que Laila esconde debajo de los cojines (como los trileros).
   - Cumple: repetir el orden de las velas de la tarta y cantar el cumpleaños feliz.
-  - Comida con Begoña y David: juegos de mesa, el del 1% (preguntas cada vez más difíciles)
+  - Juegos de mesa con Begoña y David: el del 1% (preguntas cada vez más difíciles)
     y un Pictionary en el que Alex dibuja fatal.
   - Noche de maquillaje: maquillar a Alex con el dedo (la foto se guarda en el álbum).
   - La uni: examen tipo test sobre vosotros.
   - Cenas: atrapar al vuelo los ingredientes.
 - **Combates:** al final de muchas aventuras, Laila lucha por turnos contra un jefe.
-- **Final:** Templo de Debod, pizza en el Vesubio, Salón de la Fama y la pista del regalo.
+- **Final:** Templo de Debod, pizza en el Vesubio, Salón de la Fama y un te quiero.
 
 ## Cómo se juega
 
@@ -36,8 +36,6 @@ La partida se guarda sola en el propio dispositivo.
 Casi todo lo personal está en `js/datos/config.js`:
 
 - `CLAVE`: la pregunta del principio (por defecto "¿Cómo te llama Alex?" → CARIÑO; también vale AMOR).
-- `PISTA_REGALO`: la pista del regalo que sale al final.
-- `CARTA_FINAL`: el mensaje de Alex en el Templo de Debod.
 - `PERSONAJES` y `LAILA`: colores y aspecto de cada personaje.
 
 Los textos, mapas y fases de cada aventura están en `js/datos/aventuras.js`, los jefes en `js/datos/jefes.js`

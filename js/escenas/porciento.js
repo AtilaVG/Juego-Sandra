@@ -1,4 +1,4 @@
-// Comida con Begoña y David (1): el juego de mesa del 1%. Preguntas de lógica cada vez
+// Juegos de mesa con Begoña y David (1): el juego de mesa del 1%. Preguntas de lógica cada vez
 // más difíciles, del 90% (casi todo el mundo la acierta) al 1%. Con B, Alex sopla una pista.
 import { P } from '../motor/pantalla.js';
 import { E } from '../motor/entrada.js';

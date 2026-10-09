@@ -257,22 +257,20 @@ export const AVENTURAS = [
   // ------------------------------------------------------------------ 6
   {
     id: 'comida',
-    nombre: 'Comida con Begoña y David',
+    nombre: 'Juegos de mesa con Begoña y David',
     puerta: 'casaSandra',
     tema: 'comedor',
     jefe: 'nervios',
     medalla: 'Medalla Aprobado',
-    objetivo: 'Ir a casa de Sandra (comida con Begoña y David)',
-    donde: 'Otra vez a tu casa, la del tejado rojo. Hoy toca comer con tu madre y con David.',
-    intro: [A('Hoy como con tu madre y con David. Estoy... tranquilísimo.'), A('(No estoy nada tranquilo.)')],
+    objetivo: 'Ir a casa de Sandra (juegos de mesa)',
+    donde: 'Otra vez a tu casa, la del tejado rojo. Hoy toca tarde de juegos de mesa con tu madre y con David.',
+    intro: [A('¡Ya hemos terminado de comer! Begoña saca los juegos de mesa.')],
     fases: [
       {
         tipo: 'porciento',
         intro: [
-          A('Hoy como con tu madre y con David. Estoy... tranquilísimo.'),
-          A('(No estoy nada tranquilo.)'),
-          A('Después de comer, Begoña saca los juegos de mesa. Primero, el del 1%.'),
-          A('Las preguntas empiezan fáciles y cada vez son más difíciles. La última solo la acierta el 1%.'),
+          A('¡Ya hemos terminado de comer! Begoña saca los juegos de mesa.'),
+          A('Primero, el del 1%: las preguntas empiezan fáciles y cada vez son más difíciles. La última solo la acierta el 1%.'),
           A('Si te atascas, pulsa B o toca la tarjeta y te soplo una pista.'),
         ],
         recuerdo: false,
@@ -293,7 +291,7 @@ export const AVENTURAS = [
     ],
     recuerdo: {
       titulo: 'Tarde de juegos de mesa',
-      texto: 'La comida con Begoña y David, y después juegos de mesa: el del 1% y un Pictionary en el que yo dibujaba fatal.',
+      texto: 'La tarde de juegos de mesa con Begoña y David: el del 1% y un Pictionary en el que yo dibujaba fatal.',
     },
     despues: [A('¡Creo que les caí bien! Eso sí: mis dibujos del Pictionary no los van a olvidar nunca.')],
   },

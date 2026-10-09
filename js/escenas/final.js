@@ -1,17 +1,16 @@
 // El final: atardecer en el Templo de Debod, pizza en el Vesubio,
-// Salón de la Fama y la pista del regalo.
+// Salón de la Fama y un te quiero.
 import { P } from '../motor/pantalla.js';
 import { escribir, escribirCentrado } from '../motor/fuente.js';
 import { Guion, decir, esperar, mientras, esperarBoton } from '../motor/ui.js';
 import { musica, sfx } from '../motor/audio.js';
-import { rect, circulo, elipse, mezclar } from '../motor/dibujo.js';
+import { rect, circulo, elipse, poligono, mezclar } from '../motor/dibujo.js';
 import { estado, guardar } from '../motor/guardado.js';
 import { crearPersona } from '../arte/personas.js';
 import { lailaMundo } from '../arte/bichos.js';
 import { temploDebod, beso } from '../arte/escenario.js';
 import { medalla } from '../arte/medallas.js';
 import { AVENTURAS } from '../datos/aventuras.js';
-import { CARTA_FINAL, PISTA_REGALO, FECHA } from '../datos/config.js';
 import { MUSICA } from '../datos/musica.js';
 import { juego } from '../juego.js';
 import { entregarMedalla } from './medalla.js';
@@ -51,7 +50,6 @@ export class EscenaFinal {
     musica(MUSICA.atardecer);
     yield esperar(60);
     yield decir(['Y así, al atardecer, en el Templo de Debod...']);
-    yield decir(CARTA_FINAL.map(A));
     yield mientras(() => (this.sol = Math.min(1, this.sol + 0.004)) >= 1);
     yield esperar(40);
 
@@ -66,10 +64,10 @@ export class EscenaFinal {
     yield esperar(60);
     yield decir(['¡ENHORABUENA!', 'SANDRA, ALEX y LAILA han entrado en el SALÓN DE LA FAMA.']);
 
-    yield* this.transicion('regalo');
+    yield* this.transicion('tequiero');
     musica(MUSICA.intro);
     yield esperar(30);
-    yield decir([A('Una última cosa, cariño...'), ...PISTA_REGALO.map(A)]);
+    yield decir([A('Una última cosa, cariño...'), A('Te quiero. ♥')]);
 
     yield* this.transicion('creditos');
     estado.finalVisto = true;
@@ -91,7 +89,7 @@ export class EscenaFinal {
     else if (f === 'debod') this.dibujarDebod(ctx);
     else if (f === 'vesubio') this.dibujarVesubio(ctx);
     else if (f === 'fama') this.dibujarFama(ctx);
-    else if (f === 'regalo') this.dibujarRegalo(ctx);
+    else if (f === 'tequiero') this.dibujarTeQuiero(ctx);
     else this.dibujarCreditos(ctx);
     if (this.fundido > 0) {
       ctx.globalAlpha = this.fundido;
@@ -211,17 +209,18 @@ export class EscenaFinal {
     AVENTURAS.forEach((av, i) => ctx.drawImage(medalla(av.id), Math.round(cx - (AVENTURAS.length * sep) / 2 + i * sep), 124));
   }
 
-  dibujarRegalo(ctx) {
+  dibujarTeQuiero(ctx) {
     ctx.fillStyle = '#fbe8f0';
     ctx.fillRect(0, 0, P.ancho, P.alto);
     const cx = P.ancho / 2;
-    const bote = Math.abs(Math.sin(this.t / 15)) * 6;
-    rect(ctx, cx - 24, 70 - bote, 48, 40, '#e8405e');
-    rect(ctx, cx - 28, 60 - bote, 56, 12, '#f05a76');
-    rect(ctx, cx - 4, 60 - bote, 8, 50, '#f8d030');
-    circulo(ctx, cx - 9, 56 - bote, 7, '#f8d030');
-    circulo(ctx, cx + 9, 56 - bote, 7, '#f8d030');
-    escribirCentrado(ctx, 'TU REGALO', cx, 20, '#d03050', '#ffffff', 2);
+    // Un corazón grande que late.
+    const k = 1 + Math.max(0, Math.sin(this.t / 9)) * 0.08;
+    const r = 15 * k;
+    circulo(ctx, cx - r * 0.95, 66, r, '#e8405e');
+    circulo(ctx, cx + r * 0.95, 66, r, '#e8405e');
+    poligono(ctx, [cx - r * 1.95, 70, cx + r * 1.95, 70, cx, 70 + r * 2.4], '#e8405e');
+    circulo(ctx, cx - r * 1.2, 60, r * 0.3, '#f8a0b4');
+    escribirCentrado(ctx, 'TE QUIERO', cx, 18, '#d03050', '#ffffff', 2);
   }
 
   dibujarCreditos(ctx) {
@@ -232,7 +231,7 @@ export class EscenaFinal {
     escribirCentrado(ctx, 'Hecho con muchísimo amor', cx, 70, '#ffffff', null);
     escribirCentrado(ctx, 'por Alex (tu abuelete)', cx, 84, '#ffffff', null);
     escribirCentrado(ctx, 'para Sandra, con todo su cariño', cx, 98, '#ff8ab0', null);
-    escribirCentrado(ctx, FECHA + ' · feliz mesario ♥', cx, 122, '#f8d030', null);
+    escribirCentrado(ctx, 'Feliz mesario ♥', cx, 122, '#f8d030', null);
     ctx.drawImage(beso(), cx - 6, 140);
     escribirCentrado(ctx, 'Besos recogidos: ' + estado.besos, cx, 154, '#a0a0b8', null);
     if (this.t % 60 < 40) escribirCentrado(ctx, 'Pulsa para volver a Valdemoro', cx, 174, '#606078', null);

@@ -1,4 +1,4 @@
-// Comida con Begoña y David (2): Pictionary. Alex dibuja (fatal) y hay que adivinar qué es
+// Juegos de mesa con Begoña y David (2): Pictionary. Alex dibuja (fatal) y hay que adivinar qué es
 // cuanto antes. Begoña y David también intentan adivinarlo... sin mucho éxito.
 import { P } from '../motor/pantalla.js';
 import { E } from '../motor/entrada.js';
