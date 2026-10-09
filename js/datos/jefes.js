@@ -144,7 +144,6 @@ export const JEFES = {
       { nombre: 'Chiste malo', tipo: 'dano', poder: 1.1, texto: '¡Es tan malo que duele!' },
       { nombre: 'Quejarse de la espalda', tipo: 'nada', texto: '"Ay, mi espalda..." ¡No es muy eficaz! Abuelete...' },
       { nombre: 'Siesta de abuelete', tipo: 'curar', poder: 0.15, texto: 'Se echa una siestecita y recupera fuerzas.' },
-      { nombre: 'Llamarte cariño', tipo: 'dano', poder: 1.2, texto: 'Sandra se sonroja... ¡y Laila se despista!' },
     ],
     // Ataque especial: lo usa una vez, cuando le queda la mitad de PS.
     especial: {
