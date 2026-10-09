@@ -36,6 +36,35 @@ function ojosEnfadados(c, x1, x2, y, r = 3) {
 }
 
 // ====================================================================== LAILA
+// Gata tricolor: blanca, con manchas naranjas y oscuras, y cabeza y cola atigradas.
+
+// Dibuja solo dentro de una elipse (para las manchas del pelo).
+function dentroDe(c, cx, cy, rx, ry, dibujar) {
+  c.save();
+  c.beginPath();
+  c.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+  c.clip();
+  dibujar();
+  c.restore();
+}
+
+// Cola atigrada (curva de inicio, control y punta) con anillos y la punta oscura.
+function colaLaila(c, [x0, y0, cx, cy, x1, y1], grosor, anillos) {
+  const k = LAILA;
+  trazo(c, [x0, y0, cx, cy, x1, y1], k.atigrado, grosor);
+  for (const t of anillos) {
+    const u = 1 - t;
+    const x = u * u * x0 + 2 * u * t * cx + t * t * x1;
+    const y = u * u * y0 + 2 * u * t * cy + t * t * y1;
+    const dx = u * (cx - x0) + t * (x1 - cx);
+    const dy = u * (cy - y0) + t * (y1 - cy);
+    const n = Math.hypot(dx, dy) || 1;
+    const nx = (-dy / n) * grosor * 0.42;
+    const ny = (dx / n) * grosor * 0.42;
+    trazo(c, [x - nx, y - ny, x + nx, y + ny], k.rayas, grosor * 0.3);
+  }
+  circulo(c, x1, y1, grosor * 0.5, k.oscuro);
+}
 
 export function lailaMundo(f) {
   return memo('lailaMundo' + f, () =>
@@ -43,25 +72,39 @@ export function lailaMundo(f) {
       const k = LAILA;
       // cola
       if (f === 0) {
-        rect(c, 12, 11, 2, 2, k.base);
-        rect(c, 13, 8, 2, 4, k.base);
+        rect(c, 12, 11, 2, 2, k.atigrado);
+        rect(c, 13, 8, 2, 4, k.atigrado);
+        rect(c, 13, 10, 2, 1, k.rayas);
+        rect(c, 13, 8, 2, 1, k.oscuro);
       } else {
-        rect(c, 12, 12, 3, 2, k.base);
-        rect(c, 14, 10, 1, 3, k.base);
+        rect(c, 12, 12, 3, 2, k.atigrado);
+        rect(c, 14, 10, 1, 3, k.atigrado);
+        rect(c, 13, 12, 1, 2, k.rayas);
+        rect(c, 14, 10, 1, 1, k.oscuro);
       }
-      elipse(c, 8, 12, 4.6, 3.2, k.base);
-      elipse(c, 8, 12.5, 2, 2.2, k.pecho);
-      poligono(c, [3, 6, 4, 1.5, 7, 4.5], k.base);
-      poligono(c, [13, 6, 12, 1.5, 9, 4.5], k.base);
-      elipse(c, 8, 7, 5, 3.8, k.base);
-      rect(c, 7, 3, 2, 2, k.rayas);
-      rect(c, 3, 7, 1, 1, k.rayas);
-      rect(c, 12, 7, 1, 1, k.rayas);
+      // cuerpo blanco con manchas a los lados
+      elipse(c, 8, 12, 4.6, 3.2, k.blanco);
+      dentroDe(c, 8, 12, 4.6, 3.2, () => {
+        rect(c, 3, 10, 2, 3, k.naranja);
+        rect(c, 11, 9, 2, 3, k.oscuro);
+        rect(c, 12, 12, 1, 1, k.naranja);
+      });
+      rect(c, 8, 14, 1, 2, '#d0c6ba');
+      // orejas
+      poligono(c, [3, 6, 4, 1.5, 7, 4.5], k.naranja);
+      poligono(c, [13, 6, 12, 1.5, 9, 4.5], k.atigrado);
+      // cabeza: gorro atigrado y careta blanca
+      elipse(c, 8, 7, 5, 3.8, k.blanco);
+      dentroDe(c, 8, 7, 5, 3.8, () => {
+        rect(c, 2, 2, 12, 7, k.atigrado);
+        rect(c, 3, 3, 2, 2, k.naranja);
+        poligono(c, [8, 4, 10.5, 9, 5.5, 9], k.blanco);
+      });
+      rect(c, 6, 3, 1, 1, k.rayas);
+      rect(c, 9, 3, 1, 1, k.rayas);
       rect(c, 5, 7, 1, 2, '#283020');
       rect(c, 10, 7, 1, 2, '#283020');
       rect(c, 7, 9, 2, 1, k.nariz);
-      rect(c, 6, 14, 1, 1, k.pecho);
-      rect(c, 9, 14, 1, 1, k.pecho);
     }),
   );
 }
@@ -72,22 +115,30 @@ export function lailaEspalda(f = 0) {
       const k = LAILA;
       // cola
       const punta = f ? [54, 22] : [50, 18];
-      trazo(c, [44, 50, 56, 44, punta[0], punta[1]], k.base, 7);
-      trazo(c, [52, 30, punta[0], punta[1]], k.rayas, 7);
-      trazo(c, [55, 36, 54, 32], k.base, 7);
-      // cuerpo
-      elipse(c, 29, 46, 20, 13, k.base);
-      for (let i = 0; i < 4; i++) elipse(c, 15 + i * 9, 41 + (i % 2), 2, 6, k.rayas);
-      // cabeza
-      poligono(c, [13, 22, 16, 4, 26, 15], k.base);
-      poligono(c, [45, 22, 42, 4, 32, 15], k.base);
-      poligono(c, [16, 18, 17, 8, 23, 15], aclarar(k.nariz, 0.3));
-      poligono(c, [42, 18, 41, 8, 35, 15], aclarar(k.nariz, 0.3));
-      circulo(c, 29, 26, 14, k.base);
-      elipse(c, 29, 16, 3, 4, k.rayas);
-      elipse(c, 21, 19, 2, 4, k.rayas);
-      elipse(c, 37, 19, 2, 4, k.rayas);
-      elipse(c, 29, 33, 7, 3, aclarar(k.base, 0.15));
+      colaLaila(c, [44, 50, 56, 44, punta[0], punta[1]], 7, [0.3, 0.52, 0.74]);
+      // lomo blanco con las manchas naranjas y oscuras
+      elipse(c, 29, 46, 20, 13, k.blanco);
+      dentroDe(c, 29, 46, 20, 13, () => {
+        elipse(c, 17, 43, 11, 10, k.naranja);
+        elipse(c, 40, 42, 11, 8, k.oscuro);
+        elipse(c, 30, 46, 6, 5, k.naranja);
+        elipse(c, 36, 50, 6, 3, k.oscuro);
+        elipse(c, 46, 51, 4, 3, k.naranja);
+        for (let i = 0; i < 4; i++) elipse(c, 35 + i * 4, 41 + (i % 2), 1, 4, k.rayas);
+        elipse(c, 15, 37, 3, 2, aclarar(k.naranja, 0.25));
+      });
+      // cabeza atigrada (por detrás)
+      poligono(c, [13, 22, 16, 4, 26, 15], k.naranja);
+      poligono(c, [45, 22, 42, 4, 32, 15], k.atigrado);
+      poligono(c, [16, 18, 17, 8, 23, 15], aclarar(k.naranja, 0.3));
+      poligono(c, [42, 18, 41, 8, 35, 15], aclarar(k.atigrado, 0.3));
+      circulo(c, 29, 26, 14, k.atigrado);
+      dentroDe(c, 29, 26, 14, 14, () => elipse(c, 17, 18, 6, 6, k.naranja));
+      elipse(c, 29, 16, 2.5, 4, k.rayas);
+      elipse(c, 23, 18, 1.5, 3.5, k.rayas);
+      elipse(c, 35, 18, 1.5, 3.5, k.rayas);
+      elipse(c, 18, 29, 1.2, 3, k.rayas);
+      elipse(c, 40, 29, 1.2, 3, k.rayas);
     }),
   );
 }
@@ -96,29 +147,50 @@ export function lailaFrente() {
   return memo('lailaFrente', () =>
     figura(48, 48, (c) => {
       const k = LAILA;
-      trazo(c, [34, 42, 46, 40, 44, 26], k.base, 5);
-      elipse(c, 24, 36, 13, 10, k.base);
-      elipse(c, 24, 38, 7, 8, k.pecho);
-      poligono(c, [10, 18, 12, 3, 20, 11], k.base);
-      poligono(c, [38, 18, 36, 3, 28, 11], k.base);
+      colaLaila(c, [34, 42, 46, 40, 44, 26], 5, [0.4, 0.62, 0.82]);
+      // cuerpo: pecho y patas blancos, manchas en los costados
+      elipse(c, 24, 36, 13.5, 10, k.blanco);
+      dentroDe(c, 24, 36, 13.5, 10, () => {
+        elipse(c, 11, 32, 5, 7, k.naranja);
+        elipse(c, 37, 30, 5, 5, k.oscuro);
+        elipse(c, 38, 38, 4, 4, k.naranja);
+      });
+      elipse(c, 24, 32, 9, 2, '#ddd4c8');
+      // orejas (la izquierda con la base naranja)
+      poligono(c, [10, 18, 12, 3, 20, 11], k.naranja);
+      poligono(c, [38, 18, 36, 3, 28, 11], k.atigrado);
       poligono(c, [12, 15, 13, 7, 18, 12], k.nariz);
       poligono(c, [36, 15, 35, 7, 30, 12], k.nariz);
-      elipse(c, 24, 20, 13, 11, k.base);
-      rect(c, 22, 9, 4, 5, k.rayas);
-      rect(c, 11, 19, 3, 2, k.rayas);
-      rect(c, 34, 19, 3, 2, k.rayas);
+      // cabeza: gorro atigrado, careta blanca entre los ojos
+      elipse(c, 24, 20, 13, 11, k.blanco);
+      dentroDe(c, 24, 20, 13, 11, () => {
+        rect(c, 8, 6, 32, 18, k.atigrado);
+        elipse(c, 15, 12, 6, 5, k.naranja);
+        elipse(c, 24, 30, 10, 7, k.blanco);
+        poligono(c, [24, 11, 28, 24, 20, 24], k.blanco);
+        rect(c, 22, 9, 4, 2, k.rayas);
+        rect(c, 19, 10, 2, 3, k.rayas);
+        rect(c, 27, 10, 2, 3, k.rayas);
+        rect(c, 10, 18, 3, 1.5, k.rayas);
+        rect(c, 35, 18, 3, 1.5, k.rayas);
+      });
       elipse(c, 18, 19, 3.2, 3.6, k.ojos);
       elipse(c, 30, 19, 3.2, 3.6, k.ojos);
-      rect(c, 17.5, 16, 1.5, 7, '#202020');
-      rect(c, 29.5, 16, 1.5, 7, '#202020');
+      elipse(c, 18.3, 19.5, 1.3, 2.6, '#202020');
+      elipse(c, 29.7, 19.5, 1.3, 2.6, '#202020');
       rect(c, 17, 17, 1, 1, '#ffffff');
       rect(c, 29, 17, 1, 1, '#ffffff');
       poligono(c, [22, 24, 26, 24, 24, 26.5], k.nariz);
-      rect(c, 23.5, 26, 1, 2, '#383838');
-      rect(c, 21, 28, 3, 1, '#383838');
-      rect(c, 24, 28, 3, 1, '#383838');
-      elipse(c, 18, 45, 4, 2.5, k.pecho);
-      elipse(c, 30, 45, 4, 2.5, k.pecho);
+      rect(c, 23.5, 26, 1, 1.5, '#6a5650');
+      rect(c, 21, 27, 1, 1, '#6a5650');
+      rect(c, 22, 28, 2, 1, '#6a5650');
+      rect(c, 25, 28, 2, 1, '#6a5650');
+      rect(c, 27, 27, 1, 1, '#6a5650');
+      // patitas
+      elipse(c, 18, 45, 4, 2.5, k.blanco);
+      elipse(c, 30, 45, 4, 2.5, k.blanco);
+      rect(c, 14, 43, 8, 1, '#d8cfc4');
+      rect(c, 26, 43, 8, 1, '#d8cfc4');
     }),
   );
 }
